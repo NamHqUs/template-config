@@ -2,6 +2,10 @@
 
 TemplateConfig resolves `{Path}` references in .NET configuration values. Install the `Namh.Configuration.Template` package, register your usual providers, and call `BuildTemplateConfig()`:
 
+```bash
+dotnet add package Namh.Configuration.Template --version 1.0.1
+```
+
 ```csharp
 using Microsoft.Extensions.Configuration;
 
@@ -11,6 +15,8 @@ var configuration = new ConfigurationBuilder()
 ```
 
 `BuildTemplateConfig()` returns an `IConfigurationRoot`, so existing configuration APIs such as indexers, `GetSection()`, `GetChildren()`, and `Reload()` continue to work while referenced values are resolved when read. The `Get<T>()` extension reads and binds a typed value from a configuration section.
+
+Version 1.0.1 supports .NET 8, .NET 9, and .NET 10.
 
 The examples below use [`appsettings.json`](https://github.com/NamHqUs/template-config/blob/main/src/Namh.Configuration.Template.Test/appsettings.json).
 

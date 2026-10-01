@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<PackageId>Namh.Configuration.Template</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Nam Hoang</Authors>
 		<Owners>Nam Hoang</Owners>
 		<Description>Resolves references between values in Microsoft.Extensions.Configuration.</Description>
