@@ -3,6 +3,8 @@
 TemplateConfig resolves `{Path}` references in .NET configuration values. Register your usual providers and call `BuildTemplateConfig()`:
 
 ```csharp
+using Microsoft.Extensions.Configuration;
+
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .BuildTemplateConfig();
@@ -22,6 +24,8 @@ References can point into parent and sibling fields recursively, example `appset
   "Ref-Primitive1": "--{Primitive}--",                // -> Result: "--Pri--"
   "Ref-Primitive2": "{Primitive}.{Ref-Primitive1}",   // -> Result: "Pri.--Pri--"
   "Ref-Primitive-Loop": "--{{Primitive}mitive}--",    // -> Result: "--Pri--"
+
+  "Array": [ "A", "B", "{Primitive}" ],               // -> Result: [ "A", "B", "Pri" ]
 }
 ```
 
