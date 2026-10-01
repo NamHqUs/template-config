@@ -1,6 +1,6 @@
 # TemplateConfig
 
-TemplateConfig resolves `{Path}` references in .NET configuration values. Register your usual providers and call `BuildTemplateConfig()`:
+TemplateConfig resolves `{Path}` references in .NET configuration values. Install the `Namh.Configuration.Template` package, register your usual providers, and call `BuildTemplateConfig()`:
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -10,13 +10,15 @@ var configuration = new ConfigurationBuilder()
     .BuildTemplateConfig();
 ```
 
-The examples below use [`appsettings.json`](https://github.com/NamHqUs/template-config/blob/main/src/TemplateConfig.Test/appsettings.json).
+`BuildTemplateConfig()` returns an `IConfigurationRoot`, so existing configuration APIs such as indexers, `GetSection()`, `GetChildren()`, and `Reload()` continue to work while referenced values are resolved when read. The `Get<T>()` extension reads and binds a typed value from a configuration section.
+
+The examples below use [`appsettings.json`](https://github.com/NamHqUs/template-config/blob/main/src/Namh.Configuration.Template.Test/appsettings.json).
 
 ## Examples
 
 ### 1. Look up
 
-References can point into parent and sibling fields recursively, example `appsetings.json`
+References can point into parent and sibling fields recursively:
 
 ```jsonc
 {
@@ -31,6 +33,20 @@ References can point into parent and sibling fields recursively, example `appset
 
 ```csharp
 var value = configuration["Ref-Primitive-Loop"]       // -> Result: "--Pri--"
+```
+
+Use `Get<T>()` to bind a resolved value to a .NET type:
+
+```csharp
+var values = configuration.Get<string[]>("Ref-Array");
+// -> Result: [ "1", "2", "--Pri--" ]
+```
+
+Sections resolve referenced values through their indexer and child sections:
+
+```csharp
+var field = configuration.GetSection("Root:Child")["Field2"];
+// -> Result: "-F1:Pri-"
 ```
 
 ### 2. Escape a character
