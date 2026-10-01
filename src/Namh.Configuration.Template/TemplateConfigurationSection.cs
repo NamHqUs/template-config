@@ -3,7 +3,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Namh.Configuration.Template;
 
-internal class ConfigurationSection(IConfigurationRoot root, IConfigurationSection section) : IConfigurationSection
+internal class TemplateConfigurationSection(IConfigurationRoot root, IConfigurationSection section) : IConfigurationSection
 {
     string IConfigurationSection.Key => section.Key;
     string IConfigurationSection.Path => section.Path;

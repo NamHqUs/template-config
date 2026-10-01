@@ -14,11 +14,11 @@ internal class LookupDetector(IConfiguration configuration)
         => _cache.Clear();
 
     public IConfigurationSection GetLookup(string path)
-        => _cache.GetOrAdd(path, key => ParseKey(key));
+        => _cache.GetOrAdd(path, key => LookupSection(key));
 
-    private IConfigurationSection ParseKey(string path)
+    private IConfigurationSection LookupSection(string path, bool isRequired = false)
     {
-        var section = configuration.GetSection(path);
+        var section = isRequired ? configuration.GetRequiredSection(path) : configuration.GetSection(path);
 
         return ParseValue(section).section;
     }
@@ -48,7 +48,7 @@ internal class LookupDetector(IConfiguration configuration)
             {
                 if (startAt == 0)
                     throw new InvalidOperationException($"Unmatched '{END}' in configuration value: {section.Value}");
-                var newSection = ParseKey(lookupValue.ToString());
+                var newSection = LookupSection(lookupValue.ToString(), isRequired: true);
                 return (newSection, i);
             }
             else if (ch == ESCAPE && i < length 

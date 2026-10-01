@@ -3,7 +3,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace Namh.Configuration.Template;
 
-internal class ConfigurationRoot(IConfigurationRoot configurationRoot) : IConfigurationRoot, IConfiguration
+internal class TemplateConfigurationRoot(IConfigurationRoot configurationRoot) : IConfigurationRoot, IConfiguration
 {
     internal readonly LookupDetector _lookupDetector = new(configurationRoot);
 
@@ -30,14 +30,14 @@ internal class ConfigurationRoot(IConfigurationRoot configurationRoot) : IConfig
     IEnumerable<IConfigurationSection> IConfiguration.GetChildren()
     {
         foreach (var e in configurationRoot.GetChildren())
-            yield return new ConfigurationSection(this, e);
+            yield return new TemplateConfigurationSection(this, e);
     }
 
     IConfigurationSection IConfiguration.GetSection(string key)
     {
         var section = _lookupDetector.GetLookup(key);
 
-        return new ConfigurationSection(this, section);
+        return new TemplateConfigurationSection(this, section);
     }
 
     #endregion

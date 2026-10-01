@@ -8,6 +8,9 @@ public static class TemplateConfigExtensions
     public static IConfigurationRoot BuildTemplateConfig(this IConfigurationBuilder builder)
     {
         var configuration = builder.Build();
-        return new ConfigurationRoot(configuration);
+        return new TemplateConfigurationRoot(configuration);
     }
+
+    public static T? Get<T>(this IConfiguration configuration, string path)
+        => configuration.GetSection(path).Get<T>();
 }
