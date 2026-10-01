@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace TemplateConfig.Test;
+namespace Namh.Configuration.Template.Test;
 
 [TestFixture]
 public class LookupValuesTest : TestBase
@@ -17,11 +17,23 @@ public class LookupValuesTest : TestBase
     [TestCase("Root:Field2", "Pri")]
     [TestCase("Root:Child:Field1", "F1")]
     [TestCase("Root:Child:Field2", "-F1:Pri-")]
-    [TestCase("Service:HealthUrl", "https://orders.example.com/health")]
-    [TestCase("Service:OrdersUrl", "https://orders.example.com/api/orders")]
-    [TestCase("Service:StatusMessage", "Connecting to Orders API at https://orders.example.com")]
-    public void Retrieve_Key_Ref(string key, string expectedValue)
+    public void Retrieve_Path(string key, string expectedValue)
         => Assert.That(_configuration[key], Is.EqualTo(expectedValue));
+
+    [TestCase("Array", "0", "1")]
+    [TestCase("Array", "1", "2")]
+    [TestCase("Array", "2", "--Pri--")]
+    public void Retrieve_Array(string key, string index, string expectedValue)
+        => Assert.That(_configuration[$"{key}:{index}"], Is.EqualTo(expectedValue));
+
+    [TestCase("Array", "0", "1")]
+    [TestCase("Array", "1", "2")]
+    [TestCase("Array", "2", "--Pri--")]
+    public void Retrieve_Array_Section(string key, string index, string expectedValue)
+    {
+        var section = _configuration.GetSection(key);
+        Assert.That(section[index], Is.EqualTo(expectedValue));
+    }
 
     [TestCase("Escaped1", "--{abc}--")]
     [TestCase("Escaped2", "--{Primitive}--")]

@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../README.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="Namh.Configuration.Template.Test/Namh.Configuration.Template.Test.csproj" />
+  <Project Path="Namh.Configuration.Template/Namh.Configuration.Template.csproj" />
+</Solution>

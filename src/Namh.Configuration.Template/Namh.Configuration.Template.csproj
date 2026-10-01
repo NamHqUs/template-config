@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Namh.Configuration.Template</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Nam Hoang</Authors>
+    <Owners>Nam Hoang</Owners>
+    <Description>Resolves references between values in Microsoft.Extensions.Configuration.</Description>
+    <PackageProjectUrl>https://github.com/NamHqUs/template-config</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NamHqUs/template-config</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>configuration;templates;Microsoft.Extensions.Configuration</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

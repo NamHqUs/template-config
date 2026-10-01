@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/Solution Items/">
-    <File Path="Directory.Build.props" />
-    <File Path="Directory.Packages.props" />
-  </Folder>
-  <Project Path="TemplateConfig.Test/TemplateConfig.Test.csproj" />
-  <Project Path="TemplateConfig/TemplateConfig.csproj" />
-</Solution>

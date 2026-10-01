@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 
-namespace TemplateConfig;
+namespace Namh.Configuration.Template;
 
 internal class ConfigurationRoot(IConfigurationRoot configurationRoot) : IConfigurationRoot, IConfiguration
 {

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
-namespace TemplateConfig.Test;
+namespace Namh.Configuration.Template.Test;
 
 [TestFixture]
 public class ProvidersTests : TestBase

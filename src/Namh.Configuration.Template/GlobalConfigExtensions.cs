@@ -1,4 +1,4 @@
-﻿using TemplateConfig;
+﻿using Namh.Configuration.Template;
 
 #pragma warning disable IDE0130
 namespace Microsoft.Extensions.Configuration;       // use the same namespace as IConfigurationBuilder to make it easier to use

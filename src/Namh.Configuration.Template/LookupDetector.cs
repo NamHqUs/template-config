@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace TemplateConfig;
+namespace Namh.Configuration.Template;
 
 internal class LookupDetector(IConfiguration configuration)
 {

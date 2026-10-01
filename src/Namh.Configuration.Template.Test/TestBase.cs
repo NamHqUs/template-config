@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 
-namespace TemplateConfig.Test;
+namespace Namh.Configuration.Template.Test;
 
 public abstract class TestBase
 {

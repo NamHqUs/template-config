@@ -15,7 +15,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
-	  <ProjectReference Include="..\TemplateConfig\TemplateConfig.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Namh.Configuration.Template\Namh.Configuration.Template.csproj" />
 	</ItemGroup>
 
 </Project>

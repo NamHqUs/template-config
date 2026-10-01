@@ -8,7 +8,7 @@ var configuration = new ConfigurationBuilder()
     .BuildTemplateConfig();
 ```
 
-The examples below use [`src/TemplateConfig.Test/appsettings.json`](src/TemplateConfig.Test/appsettings.json).
+The examples below use [`appsettings.json`](https://github.com/NamHqUs/template-config/blob/main/src/TemplateConfig.Test/appsettings.json).
 
 ## Examples
 
