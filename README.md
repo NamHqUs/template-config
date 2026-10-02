@@ -10,8 +10,9 @@ dotnet add package Namh.Configuration.Template --version 1.0.1
 using Microsoft.Extensions.Configuration;
 
 var configuration = new ConfigurationBuilder()
-    .AddJsonFile("appsettings.json")
-    .BuildTemplateConfig();
+    .AddJsonFile("appsettings.json")        // Support for JSON files
+    .AddEnvironmentVariables()              // Support for environment variables
+    .BuildTemplateConfig();                 // Return IConfigurationRoot with resolved references
 ```
 
 `BuildTemplateConfig()` returns an `IConfigurationRoot`, so existing configuration APIs such as indexers, `GetSection()`, `GetChildren()`, and `Reload()` continue to work while referenced values are resolved when read. The `Get<T>()` extension reads and binds a typed value from a configuration section.
@@ -34,6 +35,15 @@ References can point into parent and sibling fields recursively:
   "Ref-Primitive-Loop": "--{{Primitive}mitive}--",    // -> Result: "--Pri--"
 
   "Array": [ "A", "B", "{Primitive}" ],               // -> Result: [ "A", "B", "Pri" ]
+
+  "Root": {
+    "Field1": "F1",
+    "Field2": "{Primitive}",
+    "Child": {
+      "Field1": "{Root:Field1}",
+      "Field2": "-{Root:Field1}:{Root:Field2}-"
+    }
+  },
 }
 ```
 

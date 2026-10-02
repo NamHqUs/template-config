@@ -10,8 +10,9 @@ public abstract class TestBase
     [SetUp]
     public void SetUpConfiguration()
     {
-        var builder = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json");
-        _configuration = builder.BuildTemplateConfig();
+        _configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .AddEnvironmentVariables()
+            .BuildTemplateConfig();
     }
 }
