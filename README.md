@@ -65,6 +65,27 @@ var field = configuration.GetSection("Root:Child")["Field2"];
 // -> Result: "-F1:Pri-"
 ```
 
+A section can also refer directly to another section by using its configuration
+path as the value. The referenced section's children are then available through
+`GetSection()`:
+
+```json
+{
+  "DefaultOption": "DbOptions:0",
+  "DbOptions": [
+    {
+      "Provider": "Sqlite",
+      "ConnectionString": "{ConnectionStrings:Sqlite}"
+    }
+  ]
+}
+```
+
+```csharp
+var option = configuration.GetSection("DefaultOption");
+var provider = option["Provider"]; // -> Result: "Sqlite"
+```
+
 ### 2. Escape a character
 
 Use a backtick to keep braces literal:

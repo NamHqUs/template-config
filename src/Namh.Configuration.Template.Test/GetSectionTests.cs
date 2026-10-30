@@ -47,4 +47,35 @@ public class GetSectionTests : TestBase
 
         Assert.That(_configuration["Root:Child:Field1"], Is.EqualTo("Updated through section"));
     }
+
+    [Test]
+    public void GetSection_ResolvesPlainPathToReferencedSection()
+    {
+        var section = _configuration.GetSection("Ref-Section");
+
+        Assert.That(section["Field1"], Is.EqualTo("F1"));
+        Assert.That(section["Field2"], Is.EqualTo("Pri"));
+        Assert.That(section.GetChildren().Select(child => child.Key),
+            Is.EquivalentTo(["Field1", "Field2", "Child"]));
+    }
+
+    [Test]
+    public void GetSection_ResolvesDefaultDatabaseOptionToConfiguredObject()
+    {
+        var option = _configuration.GetSection("DbProvider:DefaultDbOption");
+
+        Assert.That(option["Name"], Is.EqualTo("Sqlite In Memory"));
+        Assert.That(option["Provider"], Is.EqualTo("Sqlite"));
+        Assert.That(option["ConnectionString"], Is.EqualTo("Data Source=:memory:"));
+    }
+
+    [Test]
+    public void GetSection_ResolvesBracedPathToConfiguredObject()
+    {
+        var option = _configuration.GetSection("DbProvider:BracedDefaultDbOption");
+
+        Assert.That(option["Name"], Is.EqualTo("Sqlite In Memory"));
+        Assert.That(option["Provider"], Is.EqualTo("Sqlite"));
+        Assert.That(option["ConnectionString"], Is.EqualTo("Data Source=:memory:"));
+    }
 }

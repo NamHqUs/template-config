@@ -62,6 +62,13 @@ internal class LookupDetector(IConfiguration configuration)
         if (lookupSection != null && string.IsNullOrEmpty(value))
             return (lookupSection, section.Value.Length);
 
+        if (lookupSection is null)
+        {
+            var referencedSection = configuration.GetSection(value);
+            if (referencedSection.GetChildren().Any())
+                return (LookupSection(value), section.Value.Length);
+        }
+
         var res = (IConfigurationSection)new ResolvedConfigurationSection(section, lookupValue.ToString());
         return (res, section.Value.Length);
     }
